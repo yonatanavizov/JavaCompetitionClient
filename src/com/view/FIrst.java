@@ -21,6 +21,9 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
+
+import com.controller.TeamController;
+
 import javax.swing.AbstractListModel;
 
 public class FIrst extends JFrame {
@@ -125,8 +128,7 @@ public class FIrst extends JFrame {
 		SearchTeamBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//InfoTeam infoteam = new InfoTeam();
-				//infoteam.setVisible(true);
+				OnClickedSearchTeam();
 			}
 		});
 		SearchTeamBtn.setBounds(293, 472, 85, 21);
@@ -184,16 +186,13 @@ public class FIrst extends JFrame {
 		JButton DeleteContestBtn = new JButton("Delete");
 		DeleteContestBtn.setBounds(164, 395, 85, 21);
 		contentPane.add(DeleteContestBtn);
-		
-		
-		
-		String[][] data = {
-	            { "Kundan Kumar Jha", "4031", "CSE" },
-	            { "Anand Jha", "6014", "IT" }};
-		
 
-		
+	}
 	
-	 
+	
+	private void OnClickedSearchTeam()
+	{
+		TeamController control=new TeamController();
+		boolean answer=control.Search("macbi");
 	}
 }
