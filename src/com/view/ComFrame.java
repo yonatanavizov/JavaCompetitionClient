@@ -1,4 +1,4 @@
-package main_pacl;
+package com.view;
 
 import javax.swing.JFrame;
 

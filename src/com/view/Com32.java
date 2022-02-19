@@ -1,4 +1,4 @@
-package main_pacl;
+package com.view;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.EventQueue;
