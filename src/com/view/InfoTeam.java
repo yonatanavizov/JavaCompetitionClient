@@ -16,6 +16,8 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 
 public class InfoTeam extends JFrame {
 
@@ -36,8 +38,9 @@ public class InfoTeam extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Team t1= new Team(0,"macbi","basketball",Rank.BEGINNER,5,3,0.5f,"The winner of 2010 tornoment");
-					InfoTeam frame = new InfoTeam(t1);
+					TeamController con = new TeamController(32);
+					Team ComTeam =con.Search("Put here Team name");
+					InfoTeam frame = new InfoTeam(ComTeam);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -51,8 +54,9 @@ public class InfoTeam extends JFrame {
 	 * Create the frame.
 	 */
 	public InfoTeam(Team todisplay) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\USER\\eclipse-workspace\\UI_Proj\\Images\\Contents-logos.jpeg"));
 		team=todisplay;
-		controller=new TeamController ();
+		controller=new TeamController (32);
 		setForeground(new Color(95, 158, 160));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 770, 521);
@@ -65,8 +69,8 @@ public class InfoTeam extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("Team Info");
 		lblNewLabel.setForeground(new Color(255, 99, 71));
-		lblNewLabel.setFont(new Font("Bodoni MT", Font.BOLD, 25));
-		lblNewLabel.setBounds(316, 10, 155, 52);
+		lblNewLabel.setFont(new Font("Bodoni MT", Font.BOLD, 30));
+		lblNewLabel.setBounds(270, 45, 155, 52);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Id");
@@ -108,35 +112,35 @@ public class InfoTeam extends JFrame {
 		
 		IdLa.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		IdLa.setForeground(new Color(250, 235, 215));
-		IdLa.setBounds(158, 111, 87, 13);
+		IdLa.setBounds(79, 105, 45, 20);
 		contentPane.add(IdLa);
 		
 		
 		NameLa.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		NameLa.setForeground(new Color(250, 235, 215));
-		NameLa.setBounds(158, 149, 87, 13);
+		NameLa.setBounds(108, 149, 115, 13);
 		contentPane.add(NameLa);
 		
 		
 		RankLa.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		RankLa.setForeground(new Color(250, 235, 215));
-		RankLa.setBounds(158, 189, 97, 13);
+		RankLa.setBounds(93, 189, 68, 13);
 		contentPane.add(RankLa);
 		
 		
 		GameTypeLa.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		GameTypeLa.setForeground(new Color(250, 235, 215));
-		GameTypeLa.setBounds(169, 240, 97, 13);
+		GameTypeLa.setBounds(150, 240, 104, 13);
 		contentPane.add(GameTypeLa);
 		
 		
 		WinLoseLa.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		WinLoseLa.setForeground(new Color(250, 235, 215));
-		WinLoseLa.setBounds(186, 290, 80, 13);
+		WinLoseLa.setBounds(169, 290, 68, 13);
 		contentPane.add(WinLoseLa);
 		
 		JScrollPane SummaryScrollpane = new JScrollPane();
-		SummaryScrollpane.setBounds(174, 320, 490, 54);
+		SummaryScrollpane.setBounds(135, 335, 490, 54);
 		contentPane.add(SummaryScrollpane);
 		
 		

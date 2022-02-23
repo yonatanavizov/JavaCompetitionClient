@@ -6,6 +6,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.competition.dm.Team;
+import com.controller.TeamController;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTree;
@@ -132,9 +136,16 @@ public class Comp4 extends ComFrame {
 		
 		contentPane.add(lblNewLabel_5);
 		
-		JButton btnNewButton = new JButton("Info");
-		btnNewButton.setBounds(231, 286, 132, 53);
-		contentPane.add(btnNewButton);
+		JButton InfoBtn = new JButton("Info");
+		InfoBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				OnClickedSearchTeam();
+				
+			}
+		});
+		InfoBtn.setBounds(231, 286, 132, 53);
+		contentPane.add(InfoBtn);
 		
 		JLabel lblNewLabel_2_1_1 = new JLabel("Winner Info");
 		lblNewLabel_2_1_1.setForeground(new Color(255, 192, 203));
@@ -165,4 +176,12 @@ public class Comp4 extends ComFrame {
 		}
 		
 	}
+	 private void OnClickedSearchTeam()
+		{
+			TeamController control=new TeamController(4);
+			String TeamName= WIN.getText();
+			Team team=control.Search(TeamName);
+			InfoTeam info = new InfoTeam(team);
+			info.setVisible(true);
+		}
 }

@@ -6,6 +6,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.competition.dm.Team;
+import com.controller.TeamController;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTree;
@@ -463,6 +467,12 @@ public class Com32 extends ComFrame {
 		contentPane.add(lblNewLabel_1_1);
 		
 		JButton btnNewButton = new JButton("Info");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				OnClickedSearchTeam();
+			}
+		});
 		btnNewButton.setBounds(442, 385, 132, 53);
 		contentPane.add(btnNewButton);
 		
@@ -495,4 +505,12 @@ public class Com32 extends ComFrame {
 		}
 		
 	}
+	 private void OnClickedSearchTeam()
+		{
+			TeamController control=new TeamController(32);
+			String TeamName= WIN.getText();
+			Team team=control.Search(TeamName);
+			InfoTeam info = new InfoTeam(team);
+			info.setVisible(true);
+		}
 }
