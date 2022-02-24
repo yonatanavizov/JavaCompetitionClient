@@ -7,7 +7,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.competition.dm.Contest;
+import com.competition.dm.Match;
 import com.competition.dm.Team;
+import com.competition.dm.Match.OutCome;
 import com.controller.TeamController;
 
 import javax.swing.JLabel;
@@ -31,6 +34,8 @@ import javax.swing.JComponent;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.awt.Color;
 
 public class Com16 extends ComFrame {
@@ -52,6 +57,9 @@ public class Com16 extends ComFrame {
 	private JTextField IN2R3;
 	private JTextField IN1F;
 	private JTextField WIN;
+	JTextField [] Inputfield;
+	private static int compSize=16;
+	private Team winner ;
 
 	/**
 	 * Launch the application.
@@ -60,7 +68,37 @@ public class Com16 extends ComFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Com16 frame = new Com16();
+					TeamController ts = new TeamController(compSize);
+					Contest contest=new Contest("contest16",1);
+					Team t1 =ts.Search("T1");
+					Match m1 =new Match (t1,t1,0);
+					m1.set_outcome(OutCome.Team_A_Won);
+					ArrayList <Match> r1=new ArrayList<Match>();
+					r1.add(m1);
+					r1.add(m1);
+					r1.add(m1);
+					r1.add(m1);
+					r1.add(m1);
+					r1.add(m1);
+					r1.add(m1);
+					r1.add(m1);
+					ArrayList <Match> r2=new ArrayList<Match>();
+					r2.add(m1);
+					r2.add(m1);
+					r2.add(m1);
+					r2.add(m1);
+					ArrayList <Match> r3=new ArrayList<Match>();
+					r3.add(m1);
+					r3.add(m1);
+					ArrayList <Match> r4=new ArrayList<Match>();
+					r4.add(m1);
+					HashMap<String,ArrayList<Match>> ma= new HashMap <String,ArrayList<Match>> ();
+					ma.put("0", r1);
+					ma.put("1", r2);
+					ma.put("2", r3);
+					ma.put("3", r4);
+					contest.set_matches(ma);
+					Com16 frame = new Com16(contest);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -72,7 +110,7 @@ public class Com16 extends ComFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Com16() {
+	public Com16(Contest contest) {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 933, 568);
 		contentPane = new JPanel();
@@ -295,7 +333,20 @@ public class Com16 extends ComFrame {
 		lblNewLabel_2_1_1.setForeground(new Color(255, 192, 203));
 		lblNewLabel_2_1_1.setBounds(479, 286, 136, 22);
 		contentPane.add(lblNewLabel_2_1_1);
-		setTor();
+		Component [] array= contentPane.getComponents();
+		 Inputfield= new JTextField[compSize];
+		 
+		 
+		 
+		 for(int i=0,counter=0;i<array.length;i++)
+			{
+				if(array[i] instanceof JTextField)
+				{
+					Inputfield[counter]= (JTextField)array[i];
+					counter++;
+				}
+			}
+		setTor(contest);
 	}
 	@Override
 	public void Display()
@@ -303,21 +354,36 @@ public class Com16 extends ComFrame {
 		this.setVisible(true);
 	}
 	
-	 private void setTor()
+	 private void setTor(Contest cont)
 	{
-		Component [] array= contentPane.getComponents();
-		int len=17;
-		
-		JTextField [] Inputfield= new JTextField[len];
-		for(int i=0,counter=0;i<array.length;i++)
-		{
-			if(array[i] instanceof JTextField)
-			{
-				Inputfield[counter]= (JTextField)array[i];
-				Inputfield[counter].setText(""+counter);
-				counter++;
-			}
-		}
+         int counter =0;
+		 HashMap<String,ArrayList<Match>> matches= cont.get_matches();
+		 for(int i=0;i<matches.size();i++)
+		 {
+			 ArrayList<Match> round =matches.get(String.valueOf(i));
+			 for( int j=0;j<round.size();j++)
+			 {
+				 String Dis= round.get(j).get_team_a().get_name()+" VS "+ round.get(j).get_team_b().get_name();
+				 Inputfield[counter].setText(Dis);
+				 counter++;
+			 }
+		 }
+		 int len=matches.size()-1;
+		 Match m=matches.get(String.valueOf(len)).get(0);
+		 if(m.get_outcome()==OutCome.Team_A_Won)
+		 {
+		 winner=m.get_team_a();
+		 WIN.setText(winner.get_name());
+		 }
+		 else if (m.get_outcome()==OutCome.Team_B_Won)
+		 {
+			 winner=m.get_team_b();
+			 WIN.setText(winner.get_name());
+		 }
+		 else
+		 {
+			 WIN.setText("None");
+		 }
 		
 	}
 	 private void OnClickedSearchTeam()

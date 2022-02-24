@@ -7,7 +7,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.competition.dm.Contest;
+import com.competition.dm.Match;
 import com.competition.dm.Team;
+import com.competition.dm.Match.OutCome;
 import com.controller.TeamController;
 
 import javax.swing.JLabel;
@@ -31,6 +34,8 @@ import javax.swing.JComponent;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.awt.Color;
 
 public class Com32 extends ComFrame {
@@ -68,6 +73,9 @@ public class Com32 extends ComFrame {
 	private JTextField IN14R1;
 	private JTextField IN15R1;
 	private JTextField IN16R1;
+	JTextField [] Inputfield;
+	private static int compSize=32;
+	private Team winner ;
 
 	/**
 	 * Launch the application.
@@ -76,7 +84,56 @@ public class Com32 extends ComFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Com32 frame = new Com32();
+					TeamController ts = new TeamController(compSize);
+					Contest contest=new Contest("contest32",1);
+					Team t1 =ts.Search("T2");
+					Match m1 =new Match (t1,t1,0);
+					m1.set_outcome(OutCome.Team_A_Won);
+					ArrayList <Match> r1=new ArrayList<Match>();
+					r1.add(m1);
+					r1.add(m1);
+					r1.add(m1);
+					r1.add(m1);
+					r1.add(m1);
+					r1.add(m1);
+					r1.add(m1);
+					r1.add(m1);
+					r1.add(m1);
+					r1.add(m1);
+					r1.add(m1);
+					r1.add(m1);
+					r1.add(m1);
+					r1.add(m1);
+					r1.add(m1);
+					r1.add(m1);
+					ArrayList <Match> r2=new ArrayList<Match>();
+					r2.add(m1);
+					r2.add(m1);
+					r2.add(m1);
+					r2.add(m1);
+					r2.add(m1);
+					r2.add(m1);
+					r2.add(m1);
+					r2.add(m1);
+					ArrayList <Match> r3=new ArrayList<Match>();
+					r3.add(m1);
+					r3.add(m1);
+					r3.add(m1);
+					r3.add(m1);
+					ArrayList <Match> r4=new ArrayList<Match>();
+					r4.add(m1);
+					r4.add(m1);
+					ArrayList <Match> r5=new ArrayList<Match>();
+					r5.add(m1);
+					HashMap<String,ArrayList<Match>> ma= new HashMap <String,ArrayList<Match>> ();
+					ma.put("0", r1);
+					ma.put("1", r2);
+					ma.put("2", r3);
+					ma.put("3", r4);
+					ma.put("4", r5);
+					contest.set_matches(ma);
+
+					Com32 frame = new Com32(contest);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -88,7 +145,7 @@ public class Com32 extends ComFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Com32() {
+	public Com32(Contest contest) {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 933, 568);
 		contentPane = new JPanel();
@@ -480,7 +537,21 @@ public class Com32 extends ComFrame {
 		lblNewLabel_2_1_1.setForeground(new Color(255, 192, 203));
 		lblNewLabel_2_1_1.setBounds(475, 353, 136, 22);
 		contentPane.add(lblNewLabel_2_1_1);
-		setTor();
+		contentPane.add(lblNewLabel_2_1_1);
+		Component [] array= contentPane.getComponents();
+		 Inputfield= new JTextField[compSize];
+		 
+		 
+		 
+		 for(int i=0,counter=0;i<array.length;i++)
+			{
+				if(array[i] instanceof JTextField)
+				{
+					Inputfield[counter]= (JTextField)array[i];
+					counter++;
+				}
+			}
+		setTor(contest);
 	}
 	@Override
 	public void Display()
@@ -488,22 +559,36 @@ public class Com32 extends ComFrame {
 		this.setVisible(true);
 	}
 	
-	 private void setTor()
+	 private void setTor(Contest cont)
 	{
-		Component [] array= contentPane.getComponents();
-		int len=34;
-		
-		JTextField [] Inputfield= new JTextField[len];
-		for(int i=0,counter=0;i<array.length;i++)
-		{
-			if(array[i] instanceof JTextField)
-			{
-				Inputfield[counter]= (JTextField)array[i];
-				Inputfield[counter].setText(""+counter);
-				counter++;
-			}
-		}
-		
+		 int counter =0;
+		 HashMap<String,ArrayList<Match>> matches= cont.get_matches();
+		 for(int i=0;i<matches.size();i++)
+		 {
+			 ArrayList<Match> round =matches.get(String.valueOf(i));
+			 for( int j=0;j<round.size();j++)
+			 {
+				 String Dis= round.get(j).get_team_a().get_name()+" VS "+ round.get(j).get_team_b().get_name();
+				 Inputfield[counter].setText(Dis);
+				 counter++;
+			 }
+		 }
+		 int len=matches.size()-1;
+		 Match m=matches.get(String.valueOf(len)).get(0);
+		 if(m.get_outcome()==OutCome.Team_A_Won)
+		 {
+		 winner=m.get_team_a();
+		 WIN.setText(winner.get_name());
+		 }
+		 else if (m.get_outcome()==OutCome.Team_B_Won)
+		 {
+			 winner=m.get_team_b();
+			 WIN.setText(winner.get_name());
+		 }
+		 else
+		 {
+			 WIN.setText("None");
+		 }
 	}
 	 private void OnClickedSearchTeam()
 		{

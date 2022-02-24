@@ -90,8 +90,8 @@ public class FIrst extends JFrame {
 		Team16ContestBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-			  Com16 frame16=new Com16();
-			  frame16.Display();
+			  //Com16 frame16=new Com16();
+			  //frame16.Display();
 			}
 		});
 		Team16ContestBtn.setBounds(643, 329, 85, 21);
@@ -101,8 +101,8 @@ public class FIrst extends JFrame {
 		Team32ContestBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Com32 frame32=new Com32();
-				 frame32.Display();
+				//Com32 frame32=new Com32();
+				 //frame32.Display();
 				
 			}
 		});
@@ -113,8 +113,8 @@ public class FIrst extends JFrame {
 		Team4ContestBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Comp4 frame4=new Comp4();
-				  frame4.Display();
+				//Comp4 frame4=new Comp4();
+				  //frame4.Display();
 			}
 		});
 		Team4ContestBtn.setBounds(643, 271, 85, 21);
@@ -188,6 +188,10 @@ public class FIrst extends JFrame {
 		ShowContestBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				int index = ContestList.getSelectedIndex();
+				
+				
+				
 			       
 			}
 		});
@@ -208,10 +212,6 @@ public class FIrst extends JFrame {
 		});
 		DeleteContestBtn.setBounds(166, 424, 85, 21);
 		contentPane.add(DeleteContestBtn);
-		
-		JLabel DebugLbl = new JLabel("New label");
-		DebugLbl.setBounds(537, 275, 45, 13);
-		contentPane.add(DebugLbl);
 
 	}
 	
