@@ -29,6 +29,7 @@ import javax.swing.table.DefaultTableModel;
 import com.competition.dm.Team;
 import com.controller.ContestController;
 import com.controller.TeamController;
+import com.model.TeamModel;
 
 import javax.swing.AbstractListModel;
 import javax.swing.DefaultListModel;
@@ -44,27 +45,11 @@ public class FIrst extends JFrame {
 	TeamController control;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					FIrst frame = new FIrst();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
 	public FIrst() {
 	    contestsetup =new ContestController ();
-	    control=new TeamController(32);
+	    control=new TeamController();
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\USER\\eclipse-workspace\\UI_Proj\\Images\\Contents-logos.jpeg"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 796, 549);
@@ -218,7 +203,7 @@ public class FIrst extends JFrame {
 	
 	private void OnClickedSearchTeam()
 	{
-		TeamController control=new TeamController(32);
+		TeamController control=new TeamController();
 		String TeamName= SearchTeamInput.getText();
 		Team team=control.Search(TeamName);
 		InfoTeam info = new InfoTeam(team);

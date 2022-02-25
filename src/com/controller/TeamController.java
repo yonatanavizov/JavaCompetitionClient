@@ -4,12 +4,13 @@ import com.competition.dm.Team;
 
 import com.model.TeamModel;
 
-public class TeamController {
-TeamModel model;
+public class TeamController
+{
+	TeamModel model;
 
-	public TeamController(int amount)
+	public TeamController()
 	{
-		model=new TeamModel();
+		model = TeamModel.get_instance();
 	}
 	
 	public Team Search(String name)

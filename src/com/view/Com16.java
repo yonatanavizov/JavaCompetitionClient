@@ -56,7 +56,7 @@ public class Com16 extends ComFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TeamController ts = new TeamController(compSize);
+					TeamController ts = new TeamController();
 					Contest contest=new Contest("contest16",1);
 					Team t1 =ts.Search("T1");
 					Match m1 =new Match (t1,t1,0);
@@ -376,7 +376,7 @@ public class Com16 extends ComFrame {
 	}
 	 private void OnClickedSearchTeam()
 		{
-			TeamController control=new TeamController(16);
+			TeamController control=new TeamController();
 			String TeamName= WIN.getText();
 			Team team=control.Search(TeamName);
 			InfoTeam info = new InfoTeam(team);

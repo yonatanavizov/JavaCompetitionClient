@@ -1,22 +1,50 @@
 package com.model;
 
+import com.client.Client;
+import com.client.Request;
 import com.competition.dm.Team;
 import com.competition.dm.Team.Rank;
+import com.utility.CompetitionUtility;
 
-public class TeamModel {
+public class TeamModel
+{
 	Team[] teams;
-	private static int amount =32;
-	public TeamModel()
+	
+    private static TeamModel teamModel = null;
+
+	public static TeamModel get_instance()
 	{
-		teams= new Team [amount];
+		if (teamModel == null)
+			teamModel = new TeamModel();
+ 
+        return teamModel;
+	}
+    
+	private TeamModel()
+	{
+		PopulateData();
+	}
+	
+	private void PopulateData()
+	{
+		Client c = new Client(CompetitionUtility.PortForServer);
+		Request team_req = new Request("get", "Team", 0);
+		c.set_request(team_req);
 		
-		//should be from server
-		for(int i =0;i<=amount-1;i++)
+		Thread t1 = new Thread(c);
+		t1.start();
+	}
+	
+	public void set_teams(Request re)
+	{
+		Team[] givenData = (Team[]) re.get_data();
+		teams = new Team[givenData.length];
+		
+		for(int i = 0; i < givenData.length; i++)
 		{
-			teams[i]=new Team(i,"T"+i,"Basketball",Rank.BEGINNER,i+10,i,0.5f+i*0.01f,"This Team position is "+i) ;
-			
+			teams[i] = new Team(givenData[i]);
 		}
-		
+		System.out.println("Someone set my teams -- " + teams.length + "\n"+teams[0].toString());
 	}
 	
 	public Team[] getTeams()

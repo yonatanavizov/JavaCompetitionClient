@@ -24,6 +24,8 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import com.google.gson.reflect.TypeToken;
+import com.model.TeamModel;
+import com.utility.CompetitionUtility;
 
 
 public class Client implements Runnable
@@ -32,6 +34,7 @@ public class Client implements Runnable
 	int port;
 	Socket socket;
 	boolean shouldWaitForAnswer = false;
+	Request toReturn;
 	
 	public Client(int port)
 	{
@@ -47,7 +50,10 @@ public class Client implements Runnable
 		}
 	}
 	
-	
+	public Request getRequestAnswerFromServer()
+	{
+		return toReturn;
+	}
 	public String parseRequestToString(Request re)
 	{
 		
@@ -93,7 +99,6 @@ public class Client implements Runnable
 		    @Override
 		    public Request deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException
 		    {
-		    	System.out.println("inside deseri");
 		        JsonObject jsonObject = json.getAsJsonObject();
 		        String action = jsonObject.get("action").getAsString();
 		        String objType = jsonObject.get("objType").getAsString();
@@ -148,7 +153,7 @@ public class Client implements Runnable
 	{
 		try
 		{
-			socket = new Socket("127.0.0.1", 4545);
+			socket = new Socket(CompetitionUtility.hostLocation, CompetitionUtility.PortForServer);
 			System.out.println("server socket: " + socket);
 			
 			System.out.println("going to send to server\n" + parsedRequest);
@@ -163,8 +168,13 @@ public class Client implements Runnable
 			
 			if(shouldWaitForAnswer)
 			{
-				Request fromServer = ParseRequestFromServer(answer);
-				System.out.println("PARSED FROM SERVER\n"+fromServer.toString());
+				toReturn = ParseRequestFromServer(answer);
+				System.out.println("PARSED FROM SERVER\n"+toReturn.toString());
+				
+				if(toReturn.get_objType().equals("Team"))
+				{
+					TeamModel.get_instance().set_teams(toReturn);
+				}
 			}
 			
 			System.out.println("got from server\n"+answer);
@@ -179,26 +189,5 @@ public class Client implements Runnable
 			e.printStackTrace();
 		}
 
-	}
-	
-	public static void main(String[] args) throws ClassNotFoundException
-	{
-		System.out.println("Statring client...");
-		for(int i = 0; i < 3; i++)
-		{
-			Team[] toAdd = new Team[2];
-			toAdd[0] = new Team();
-			toAdd[1] = new Team();
-			Request re = new Request("get", "Team", 2);
-			re.set_data(toAdd);
-
-			Client c = new Client(4545);
-			c.set_request(re);
-			
-			String s = c.parseRequestToString(re);
-			System.out.println(s);
-			//Thread t1 = new Thread(c);
-			//t1.start();
-		}
 	}
 }

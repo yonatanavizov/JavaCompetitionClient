@@ -38,7 +38,7 @@ public class InfoTeam extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TeamController con = new TeamController(32);
+					TeamController con = new TeamController();
 					Team ComTeam =con.Search("Put here Team name");
 					InfoTeam frame = new InfoTeam(ComTeam);
 					frame.setVisible(true);
@@ -56,7 +56,7 @@ public class InfoTeam extends JFrame {
 	public InfoTeam(Team todisplay) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\USER\\eclipse-workspace\\UI_Proj\\Images\\Contents-logos.jpeg"));
 		team=todisplay;
-		controller=new TeamController (32);
+		controller=new TeamController ();
 		setForeground(new Color(95, 158, 160));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 770, 521);
