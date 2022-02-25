@@ -25,16 +25,4 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.pde.PluginNature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>src/com/client/Client.java</name>
-			<type>1</type>
-			<location>C:/Users/USER/eclipse-workspace/UI_Proj/src/com/client/Client.java</location>
-		</link>
-		<link>
-			<name>src/com/client/Request.java</name>
-			<type>1</type>
-			<location>C:/Users/USER/eclipse-workspace/UI_Proj/src/com/client/Request.java</location>
-		</link>
-	</linkedResources>
 </projectDescription>

@@ -15,22 +15,10 @@ import com.controller.TeamController;
 
 import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.JTree;
-import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.JList;
-import javax.swing.ScrollPaneConstants;
-import java.awt.GridLayout;
-import java.awt.FlowLayout;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;

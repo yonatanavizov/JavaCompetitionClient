@@ -148,7 +148,7 @@ public class Client implements Runnable
 	{
 		try
 		{
-			socket = new Socket("127.0.0.1", port);
+			socket = new Socket("127.0.0.1", 4545);
 			System.out.println("server socket: " + socket);
 			
 			System.out.println("going to send to server\n" + parsedRequest);
@@ -192,10 +192,13 @@ public class Client implements Runnable
 			Request re = new Request("get", "Team", 2);
 			re.set_data(toAdd);
 
-			Client c = new Client(34567);
+			Client c = new Client(4545);
 			c.set_request(re);
-			Thread t1 = new Thread(c);
-			t1.start();
+			
+			String s = c.parseRequestToString(re);
+			System.out.println(s);
+			//Thread t1 = new Thread(c);
+			//t1.start();
 		}
 	}
 }
