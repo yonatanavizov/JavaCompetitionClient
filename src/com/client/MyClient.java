@@ -190,15 +190,15 @@ public class MyClient implements Runnable{
 			toAdd[1] = new Team();
 			Request re = new Request("get", "Team", 2);
 			re.set_data(toAdd);
-
-			//MyClient c = new MyClient(34567);
-			//c.set_request(re);
-			//String s = c.parseRequestToString(re);
-			Gson g =new Gson();
+			System.out.println(re.toString());
+			MyClient c = new MyClient(34567);
+			c.set_request(re);
+			String s = c.parseRequestToString(re);
+			
 			
 			//Thread t1 = new Thread(c);
 			//t1.start();
-			//System.out.println(s);
+			System.out.println(s);
 		}
 	}
 
