@@ -14,11 +14,7 @@ public class ContestController {
 	
 	public ContestController()
 	{
-		for(int i =0;i<=2;i++)
-		{
-			contests.add(new Contest("T"+i,i)) ;
-			
-		}
+		
 		
 	}
 	
