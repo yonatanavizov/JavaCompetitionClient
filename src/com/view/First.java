@@ -24,6 +24,8 @@ import com.controllers.TeamController;
 import javax.swing.DefaultListModel;
 
 import java.awt.Toolkit;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class First extends JFrame
 {
@@ -112,15 +114,15 @@ public class First extends JFrame
 		lblNewLabel_5.setBounds(660, 246, 68, 15);
 		contentPane.add(lblNewLabel_5);
 		
-		JButton SearchTeamBtn = new JButton("Search");
+		JButton SearchTeamBtn = new JButton("Search by Name");
 		SearchTeamBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				OnClickedSearchTeam();
+				OnClickedSearchTeam(false);
 			}
 		});
 		//SearchTeamInput
-		SearchTeamBtn.setBounds(293, 472, 85, 21);
+		SearchTeamBtn.setBounds(278, 452, 117, 21);
 		contentPane.add(SearchTeamBtn);
 		
 		JLabel lblNewLabel_6 = new JLabel("Team name");
@@ -130,7 +132,7 @@ public class First extends JFrame
 		contentPane.add(lblNewLabel_6);
 		
 		SearchTeamInput = new JTextField();
-		SearchTeamInput.setBounds(135, 473, 143, 19);
+		SearchTeamInput.setBounds(108, 472, 143, 19);
 		contentPane.add(SearchTeamInput);
 		SearchTeamInput.setColumns(10);
 		
@@ -185,6 +187,16 @@ public class First extends JFrame
 		});
 		DeleteContestBtn.setBounds(166, 424, 85, 21);
 		contentPane.add(DeleteContestBtn);
+		
+		JButton SearchTeamSummaryBtn = new JButton("Search by Summary");
+		SearchTeamSummaryBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				OnClickedSearchTeam(true);
+			}
+		});
+		SearchTeamSummaryBtn.setBounds(279, 479, 127, 23);
+		contentPane.add(SearchTeamSummaryBtn);
 
 		
 		
@@ -193,15 +205,25 @@ public class First extends JFrame
 	}
 	
 	
-	private void OnClickedSearchTeam()
+	private void OnClickedSearchTeam(boolean bySummary)
 	{
 		TeamController control=new TeamController();
-		String TeamName= SearchTeamInput.getText();
-		Team team=control.Search(TeamName);
+		String searchText= SearchTeamInput.getText();
+		Team team = null;
+		
+		if(bySummary)
+		{
+			team =control.SearchSummary(searchText);
+		}
+		else
+		{
+			team =control.Search(searchText);
+		}
+		
 		
 		if(team == null)
 		{
-			PopUp pu = new PopUp("In correct Team name. Not found.");
+			PopUp pu = new PopUp("Team Not found.");
 			pu.setVisible(true);
 			return;
 		}
@@ -223,6 +245,7 @@ public class First extends JFrame
 	
 	private void CreateContest(int size)
 	{
+		
 		  //Com16 frame16=new Com16();
 		  //frame16.Display();
 	}
@@ -247,5 +270,4 @@ public class First extends JFrame
 				break;
 		}
 	}
-
 }

@@ -19,6 +19,12 @@ public class TeamController
 		return model.getTeamByName(name);
 	}
 	
+	public Team SearchSummary(String text)
+	{
+		//KMP search here
+		return model.getTeamBySummary(text);
+	}
+	
 	public Team get_random_team()
 	{
 		Team[] teams = model.getTeams();

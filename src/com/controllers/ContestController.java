@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 
 import com.competition.dm.Contest;
+import com.competition.dm.Team;
 import com.model.ContestModel;
 
 public class ContestController
@@ -22,7 +23,19 @@ public class ContestController
 	{
 		return model.get_contests_by_size(amountOfTeams);
 	}
-	
+	public Contest CreateRandomContest(int amountOfTeams)
+	{
+		Contest c = new Contest();
+		c.set_id(c.hashCode());
+		c.set_amountOfTeamsInContest(amountOfTeams);
+		c.set_name("Contest " + c.get_id());
+		
+		TeamController tc = new TeamController();
+		Team[] teams = tc.get_random_teams_by_amount(amountOfTeams);
+		
+		
+		return c;
+	}
 	public Contest[] get_contests()
 	{	
 		HashMap<Integer, ArrayList<Contest>> db = model.get_db();

@@ -55,6 +55,8 @@ public class ContestModel implements IModel
 				current.add(data[i]);
 			}
 		}
+		
+		CompetitionUtility.contestId = data.length;
 	}
 	
 	public ArrayList<Contest> get_contests_by_size(int size)
