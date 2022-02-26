@@ -24,6 +24,7 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import com.google.gson.reflect.TypeToken;
+import com.model.ContestModel;
 import com.model.TeamModel;
 import com.utility.CompetitionUtility;
 
@@ -174,6 +175,9 @@ public class Client implements Runnable
 				if(toReturn.get_objType().equals("Team"))
 				{
 					TeamModel.get_instance().set_teams(toReturn);
+				}
+				else if(toReturn.get_objType().equals("Contest")){
+					ContestModel.get_instance().Set_Data(toReturn);
 				}
 			}
 			

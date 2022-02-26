@@ -2,24 +2,23 @@ package com.main;
 
 import java.awt.EventQueue;
 
-import com.competition.dm.Team;
-import com.controller.TeamController;
-import com.model.TeamModel;
-import com.view.FIrst;
+import com.view.First;
 
 public class Main
 {
 	public static void main(String[] args)
 	{
-		EventQueue.invokeLater(new Runnable() {
+		EventQueue.invokeLater(new Runnable()
+		{
 			public void run()
 			{
-				try {
+				try
+				{
 					System.out.println("Competition Program Running!");
-					TeamController tc = new TeamController();
-					FIrst frame = new FIrst();
+					First frame = new First();
 					frame.setVisible(true);
-				} catch (Exception e) {
+				}
+				catch (Exception e) {
 					e.printStackTrace();
 				}
 			}

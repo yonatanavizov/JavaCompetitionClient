@@ -1,8 +1,5 @@
 package com.view;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -13,43 +10,35 @@ import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
-import javax.swing.ListModel;
 import javax.swing.JList;
-import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.LineBorder;
-import javax.swing.table.DefaultTableModel;
 
 import com.competition.dm.Team;
-import com.controller.ContestController;
-import com.controller.TeamController;
-import com.model.TeamModel;
+import com.controllers.ContestController;
+import com.controllers.TeamController;
 
-import javax.swing.AbstractListModel;
 import javax.swing.DefaultListModel;
 
 import java.awt.Toolkit;
 
-public class FIrst extends JFrame {
-
+public class First extends JFrame
+{
+	private static final long serialVersionUID = -1592704045926813516L;
+	
 	private JPanel contentPane;
 	private JTextField SearchTeamInput;
-	private JTable table;
 	ContestController contestsetup;
 	TeamController control;
 
-	/**
-	 * Create the frame.
-	 */
-	public FIrst() {
-	    contestsetup =new ContestController ();
-	    control=new TeamController();
+
+	public First()
+	{
+	    contestsetup = new ContestController ();
+	    control = new TeamController();
+	    
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\USER\\eclipse-workspace\\UI_Proj\\Images\\Contents-logos.jpeg"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 796, 549);
@@ -72,11 +61,12 @@ public class FIrst extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JButton Team16ContestBtn = new JButton("Start");
-		Team16ContestBtn.addMouseListener(new MouseAdapter() {
+		Team16ContestBtn.addMouseListener(new MouseAdapter()
+		{
 			@Override
-			public void mouseClicked(MouseEvent e) {
-			  //Com16 frame16=new Com16();
-			  //frame16.Display();
+			public void mouseClicked(MouseEvent e)
+			{
+				CreateContest(16);
 			}
 		});
 		Team16ContestBtn.setBounds(643, 329, 85, 21);
@@ -86,8 +76,7 @@ public class FIrst extends JFrame {
 		Team32ContestBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//Com32 frame32=new Com32();
-				 //frame32.Display();
+				CreateContest(32);
 				
 			}
 		});
@@ -98,8 +87,7 @@ public class FIrst extends JFrame {
 		Team4ContestBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//Comp4 frame4=new Comp4();
-				  //frame4.Display();
+				CreateContest(4);
 			}
 		});
 		Team4ContestBtn.setBounds(643, 271, 85, 21);
@@ -156,7 +144,7 @@ public class FIrst extends JFrame {
 		panel.add(scrollPane);
 		JList ContestList = new JList();
 		scrollPane.setViewportView(ContestList);
-		String[] listValues = { "Click", "To", "Add", "New", "Values" };
+		String[] listValues = ContestSetup();
 	    DefaultListModel<String> model = new DefaultListModel<>();
 	    for (String s : listValues) {
 	      model.addElement(s);
@@ -170,14 +158,13 @@ public class FIrst extends JFrame {
 		lblNewLabel_2.setFont(new Font("Maiandra GD", Font.PLAIN, 15));
 		
 		JButton ShowContestBtn = new JButton("Show");
-		ShowContestBtn.addMouseListener(new MouseAdapter() {
+		ShowContestBtn.addMouseListener(new MouseAdapter()
+		{
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mouseClicked(MouseEvent e)
+			{
 				int index = ContestList.getSelectedIndex();
-				
-				
-				
-			       
+				ShowContest(index);
 			}
 		});
 		ShowContestBtn.setBounds(48, 424, 85, 21);
@@ -213,24 +200,25 @@ public class FIrst extends JFrame {
 	
 	private String [] ContestSetup()
 	{
-		
-		String [] array=new String [contestsetup.GetContests().size()];
-		for ( int i=0;i<=contestsetup.GetContests().size()-1;i++)
+		int len = contestsetup.get_contests().length;
+		String [] array=new String [len];
+		for ( int i=0;i<=len-1;i++)
 		{
-			array[i]= contestsetup.GetContests().get(i).toString();
+			array[i]= contestsetup.get_contests()[i].toString();
 		}
 		
 		return array ;
-		
 	}
 	
+	private void CreateContest(int size)
+	{
+		  //Com16 frame16=new Com16();
+		  //frame16.Display();
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
+	private void ShowContest(int index)
+	{
+		
+	}
+
 }

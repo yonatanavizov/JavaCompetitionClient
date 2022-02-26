@@ -3,10 +3,10 @@ package com.model;
 import com.client.Client;
 import com.client.Request;
 import com.competition.dm.Team;
-import com.competition.dm.Team.Rank;
 import com.utility.CompetitionUtility;
+import com.utility.CompetitionUtility.DataTypes;
 
-public class TeamModel
+public class TeamModel implements IModel
 {
 	Team[] teams;
 	
@@ -25,7 +25,8 @@ public class TeamModel
 		PopulateData();
 	}
 	
-	private void PopulateData()
+	@Override
+	public void PopulateData()
 	{
 		Client c = new Client(CompetitionUtility.PortForServer);
 		Request team_req = new Request("get", "Team", 0);
@@ -67,6 +68,13 @@ public class TeamModel
 	public Team getTeamBySummary(String text)
 	{
 		return teams[0];
+	}
+
+
+	@Override
+	public DataTypes get_type() {
+		// TODO Auto-generated method stub
+		return CompetitionUtility.DataTypes.Team;
 	}
 	
 	

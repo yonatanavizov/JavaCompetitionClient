@@ -10,8 +10,8 @@ import javax.swing.border.EmptyBorder;
 import com.competition.dm.Contest;
 import com.competition.dm.Match;
 import com.competition.dm.Match.OutCome;
+import com.controllers.TeamController;
 import com.competition.dm.Team;
-import com.controller.TeamController;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -59,7 +59,7 @@ public class Comp4 extends ComFrame {
 			public void run() {
 				try {
 					TeamController ts = new TeamController();
-					contest=new Contest("contest4",1);
+					contest=new Contest("contest4",1,4);
 					Team t1 =ts.Search("T1");
 					Match m1 =new Match (t1,t1,0);
 					m1.set_outcome(OutCome.Team_A_Won);

@@ -1,6 +1,6 @@
 open module UI_Proj {
 	requires java.desktop;
-	requires CompetitionDataModels;
+	requires CompDataModels;
 	requires gson;
 	requires java.sql;
 }

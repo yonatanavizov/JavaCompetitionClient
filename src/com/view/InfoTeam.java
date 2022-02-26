@@ -9,7 +9,7 @@ import javax.swing.border.EmptyBorder;
 
 import com.competition.dm.Team;
 import com.competition.dm.Team.Rank;
-import com.controller.TeamController;
+import com.controllers.TeamController;
 
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -88,7 +88,7 @@ public class InfoTeam extends JFrame {
 		JLabel lblNewLabel_1_2 = new JLabel("Rank");
 		lblNewLabel_1_2.setForeground(new Color(250, 128, 114));
 		lblNewLabel_1_2.setFont(new Font("Century Gothic", Font.BOLD, 16));
-		lblNewLabel_1_2.setBounds(44, 179, 68, 30);
+		lblNewLabel_1_2.setBounds(44, 179, 179, 30);
 		contentPane.add(lblNewLabel_1_2);
 		
 		JLabel lblNewLabel_1_3 = new JLabel("Game Type");

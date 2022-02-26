@@ -12,12 +12,12 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/School Projects/Java Projects/JavaCompetitionClient/Jars/CompetitionDataModels.jar">
+	<classpathentry kind="lib" path="D:/School Projects/Java Projects/JavaCompetitionClient/Jars/gson-2.8.2.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/School Projects/Java Projects/JavaCompetitionClient/Jars/gson-2.8.2.jar">
+	<classpathentry kind="lib" path="D:/School Projects/Java Projects/JavaCompetitionClient/Jars/CompDataModels.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
