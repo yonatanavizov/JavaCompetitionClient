@@ -2,6 +2,8 @@ package com.utility;
 
 import java.util.LinkedList;
 
+import com.competition.dm.Contest;
+
 public class CompetitionUtility {
 	public static int PortForServer = 34567;
 	public static String hostLocation = "127.0.0.1";
@@ -29,6 +31,17 @@ public class CompetitionUtility {
 		for(int i = 0; i < obj.length; i++)
 		{
 			toReturn.add(obj[i]);
+		}
+		return toReturn;
+	}
+	
+	public static LinkedList<Contest> toListHardCopy(Contest[] obj)
+	{
+		LinkedList<Contest> toReturn = new LinkedList<Contest>();
+		
+		for(int i = 0; i < obj.length; i++)
+		{
+			toReturn.add(new Contest(obj[i]));
 		}
 		return toReturn;
 	}

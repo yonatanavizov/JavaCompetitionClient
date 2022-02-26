@@ -2,6 +2,7 @@ package com.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map.Entry;
 
 import com.client.Client;
@@ -43,21 +44,34 @@ public class ContestModel implements IModel
 		t1.start();
 	}
 	
+	public void PrintMe()
+	{
+		System.out.println("PRINT ME");
+		for (Entry<Integer, ArrayList<Contest>> entry : contestMap.entrySet())
+	    {
+	        ArrayList<Contest> current = (ArrayList<Contest>) entry.getValue();
+	        System.out.println(current);
+	    }
+	}
+	
 	public void Set_Data(Request re)
 	{
 		// called by Client
 		Contest[] data = (Contest[]) re.get_data();
+		System.out.println("Set data in model contest");
 		for(int i = 0; i < data.length; i++)
 		{
 			int amount = data[i].get_amountOfTeamsInContest();
+			
 			if(amount == 4 || amount == 16 || amount == 32)
 			{
+				
 				ArrayList<Contest> current = contestMap.get(amount);
-				current.add(data[i]);
+				current.add(new Contest(data[i]));
+				System.out.println("going to add datai at: " + contestMap.get(amount));
 			}
 		}
 		
-		CompetitionUtility.contestId = data.length;
 	}
 	
 	public ArrayList<Contest> get_contests_by_size(int size)
@@ -77,32 +91,35 @@ public class ContestModel implements IModel
 		{
 			contestMap.get(amount).add(new Contest(con));
 		}
-		
-		
-		System.out.println("Got new contest " + con.get_id() + " now at temp size " + contestMap.get(amount).size());
 	}
 	
 	public boolean UpdateServer()
 	{
-		//call client, send request
 		int size = 0;
 		
 	    for (Entry<Integer, ArrayList<Contest>> entry : contestMap.entrySet())
 	    {
 	        size += entry.getValue().size();
 	    }
-	    System.out.println("GOing to send to server, got size of " + size);
-		Request ask = new Request("add", "Contest", size);
+
+	    Request ask = new Request("add", "Contest", size);
 		Contest[] data= new Contest[size];
+		String[] ss = new String[size];
 		int index = 0;
 	    for (Entry<Integer, ArrayList<Contest>> entry : contestMap.entrySet())
 	    {
-	        ArrayList<Contest> current = entry.getValue();
+	        ArrayList<Contest> current = (ArrayList<Contest>) entry.getValue();
 	        for(int i = 0; i < current.size(); i++)
 	        {
-	        	data[index] = current.get(i);
-	        	System.out.println(data[index].toString());
+	        	data[index] = new Contest(current.get(i));
+	        	ss[index] = new String(current.get(i).get_name());
+	        	System.out.println(current.get(i).toString() + " || "+ data[index].toString());
 	        }
+	    }
+	    
+	    for(int i = 0; i < ss.length; i++)
+	    {
+	    	System.out.println(ss[i]);
 	    }
 		ask.set_data(data);
 		

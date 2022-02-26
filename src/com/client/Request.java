@@ -62,13 +62,20 @@ public class Request
 		}
 	}
 	
-	public void set_data(Contest[] data)
+	public void set_data(Contest[] givenData)
 	{
-		amountOfObjects = data.length;
+		System.out.println("LEN OF GIVEN DATA "+givenData.length);
+		for(int i = 0; i < givenData.length; i++)
+		{
+			System.out.println(givenData[i]);
+		}
+		
+		amountOfObjects = givenData.length;
 		this.data = new Contest[amountOfObjects];
 		for(int i = 0; i < this.data.length; i++)
 		{
-			this.data[i] = new Contest(data[i]);
+			System.out.println("setdata: " + givenData[i].get_name() + " " + givenData[i].get_matches().size());
+			this.data[i] = new Contest(givenData[i]);
 		}
 	}
 	

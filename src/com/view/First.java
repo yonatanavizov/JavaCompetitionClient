@@ -21,6 +21,7 @@ import com.competition.dm.Contest;
 import com.competition.dm.Team;
 import com.controllers.ContestController;
 import com.controllers.TeamController;
+import com.model.ContestModel;
 
 import javax.swing.DefaultListModel;
 
@@ -35,6 +36,8 @@ public class First extends JFrame
 	JList<String> ContestList;
 	ContestController contestsetup;
 	TeamController control;
+	
+	JButton SaveData = new JButton("Save Data");
 
 	public First()
 	{
@@ -199,30 +202,15 @@ public class First extends JFrame
 		SearchTeamSummaryBtn.setBounds(279, 479, 155, 23);
 		contentPane.add(SearchTeamSummaryBtn);
 		
-		JButton SaveAllBtn = new JButton("Save All");
-		SaveAllBtn.addMouseListener(new MouseAdapter()
-		{
+		
+		SaveData.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e)
-			{
-				boolean ans = contestsetup.SaveAll();
-				String s = "";
-				if(ans)
-				{
-					s = "Successfully saved to server";
-				}
-				else
-				{
-					s = "Failed to save to server";
-				}
-				
-				PopUp pu = new PopUp(s);
-				pu.setVisible(true);
+			public void mouseClicked(MouseEvent e) {
+				SaveToServer();
 			}
 		});
-		
-		SaveAllBtn.setBounds(44, 84, 89, 23);
-		contentPane.add(SaveAllBtn);
+		SaveData.setBounds(496, 390, 89, 23);
+		contentPane.add(SaveData);
 
 	}
 	
@@ -319,5 +307,24 @@ public class First extends JFrame
 	    DefaultListModel<String> model = (DefaultListModel<String>) ContestList.getModel();
 	    model.addElement(toAdd);
 	    ContestList.setModel(model);
+	}
+	
+	private void SaveToServer()
+	{
+		PopUp pu2 = new PopUp("Going to save");
+		pu2.setVisible(true);
+		boolean ans = contestsetup.SaveAll();
+		String s = "";
+		if(ans)
+		{
+			s = "Successfully saved to server";
+		}
+		else
+		{
+			s = "Failed to save to server";
+		}
+		
+		PopUp pu = new PopUp(s);
+		pu.setVisible(true);
 	}
 }
