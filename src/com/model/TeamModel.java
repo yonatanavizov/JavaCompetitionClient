@@ -5,6 +5,7 @@ import com.client.Request;
 import com.competition.ISearchAlgoFamily;
 import com.competition.ISearchAlgoFamily.SearchResult;
 import com.competition.NaiveSearchAlgo;
+import com.competition.dm.Contest;
 import com.competition.dm.Team;
 import com.utility.CompetitionUtility;
 import com.utility.CompetitionUtility.DataTypes;
@@ -13,20 +14,24 @@ public class TeamModel implements IModel
 {
 	Team[] teams;
 	ISearchAlgoFamily searcher;
-	
+	private static int AmountOfModel = 0;
+
     private static TeamModel teamModel = null;
 
 	public static TeamModel get_instance()
 	{
-		if (teamModel == null)
+		if (teamModel == null && AmountOfModel == 0)
+		{
+			System.out.println("TeamModel Singleton Ready..");
 			teamModel = new TeamModel();
+		}
  
         return teamModel;
 	}
     
 	private TeamModel()
 	{
-		
+		AmountOfModel++;
 		PopulateData();
 	}
 	
@@ -35,6 +40,9 @@ public class TeamModel implements IModel
 	{
 		Client c = new Client();
 		Request team_req = new Request("get", "Team", 0);
+		Team[] fake = new Team[1];
+		fake[0] = new Team();
+		team_req.set_data(fake);
 		c.set_request(team_req);
 		
 		Thread t1 = new Thread(c);

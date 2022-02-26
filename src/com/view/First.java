@@ -26,18 +26,36 @@ import com.model.ContestModel;
 import javax.swing.DefaultListModel;
 
 import java.awt.Toolkit;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class First extends JFrame
 {
 	private static final long serialVersionUID = -1592704045926813516L;
 	
 	private JPanel contentPane;
-	private JTextField SearchTeamInput;
+	private JTextField SearchTeamInput= new JTextField();
 	JList<String> ContestList;
 	ContestController contestsetup;
 	TeamController control;
 	
 	JButton SaveData = new JButton("Save Data");
+	JLabel lblNewLabel_1 = new JLabel("Competition  Tornument");
+	JLabel lblNewLabel = new JLabel("Founded By :\r\nAsaf Dangoor & \r\nYonatan Avizov\r\n");
+	JButton Team16ContestBtn = new JButton("Start");
+	JButton Team32ContestBtn = new JButton("Start");
+	JButton Team4ContestBtn = new JButton("Start");
+	JLabel lblNewLabel_3 = new JLabel("16 Teams");
+	JLabel lblNewLabel_4 = new JLabel("32 Teams");
+	JLabel lblNewLabel_5 = new JLabel("4 Teams");
+	JButton SearchTeamBtn = new JButton("Search by Name");
+	JLabel lblNewLabel_6 = new JLabel("Team name");
+	JScrollPane scrollPane = new JScrollPane();
+	JPanel panel = new JPanel();
+	JLabel lblNewLabel_2 = new JLabel("<html>In following page you will have 3 options:<br/>- 32 Teams competiton<br/>-16 Teams competition<br/>-4 Teams competition</html>",SwingConstants.CENTER);
+	JButton ShowContestBtn = new JButton("Show");
+	JButton DeleteContestBtn = new JButton("Delete");
+	JButton SearchTeamSummaryBtn = new JButton("Search by Summary");
 
 	public First()
 	{
@@ -48,24 +66,22 @@ public class First extends JFrame
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 796, 549);
 		contentPane = new JPanel();
+
 		contentPane.setBackground(new Color(47, 79, 79));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel_1 = new JLabel("Competition  Tornument");
 		lblNewLabel_1.setForeground(new Color(255, 165, 0));
 		lblNewLabel_1.setFont(new Font("Footlight MT Light", Font.BOLD, 25));
 		lblNewLabel_1.setBounds(247, 10, 430, 70);
 		contentPane.add(lblNewLabel_1);
 		
-		JLabel lblNewLabel = new JLabel("Founded By :\r\nAsaf Dangoor & \r\nYonatan Avizov\r\n");
 		lblNewLabel.setForeground(new Color(255, 182, 193));
 		lblNewLabel.setFont(new Font("Tempus Sans ITC", Font.BOLD, 12));
 		lblNewLabel.setBounds(465, 422, 296, 80);
 		contentPane.add(lblNewLabel);
 		
-		JButton Team16ContestBtn = new JButton("Start");
 		Team16ContestBtn.addMouseListener(new MouseAdapter()
 		{
 			@Override
@@ -77,7 +93,6 @@ public class First extends JFrame
 		Team16ContestBtn.setBounds(643, 329, 85, 21);
 		contentPane.add(Team16ContestBtn);
 		
-		JButton Team32ContestBtn = new JButton("Start");
 		Team32ContestBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -88,7 +103,6 @@ public class First extends JFrame
 		Team32ContestBtn.setBounds(643, 391, 85, 21);
 		contentPane.add(Team32ContestBtn);
 		
-		JButton Team4ContestBtn = new JButton("Start");
 		Team4ContestBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -98,25 +112,21 @@ public class First extends JFrame
 		Team4ContestBtn.setBounds(643, 271, 85, 21);
 		contentPane.add(Team4ContestBtn);
 		
-		JLabel lblNewLabel_3 = new JLabel("16 Teams");
 		lblNewLabel_3.setForeground(new Color(250, 235, 215));
 		lblNewLabel_3.setFont(new Font("Sitka Text", Font.PLAIN, 14));
 		lblNewLabel_3.setBounds(660, 302, 85, 17);
 		contentPane.add(lblNewLabel_3);
 		
-		JLabel lblNewLabel_4 = new JLabel("32 Teams");
 		lblNewLabel_4.setForeground(new Color(250, 235, 215));
 		lblNewLabel_4.setFont(new Font("Sitka Text", Font.PLAIN, 14));
 		lblNewLabel_4.setBounds(660, 360, 68, 21);
 		contentPane.add(lblNewLabel_4);
 		
-		JLabel lblNewLabel_5 = new JLabel("4 Teams");
 		lblNewLabel_5.setForeground(new Color(250, 235, 215));
 		lblNewLabel_5.setFont(new Font("Sitka Text", Font.PLAIN, 14));
 		lblNewLabel_5.setBounds(660, 246, 68, 15);
 		contentPane.add(lblNewLabel_5);
 		
-		JButton SearchTeamBtn = new JButton("Search by Name");
 		SearchTeamBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -127,23 +137,19 @@ public class First extends JFrame
 		SearchTeamBtn.setBounds(278, 452, 156, 21);
 		contentPane.add(SearchTeamBtn);
 		
-		JLabel lblNewLabel_6 = new JLabel("Team name");
 		lblNewLabel_6.setForeground(new Color(255, 228, 181));
 		lblNewLabel_6.setFont(new Font("Bookman Old Style", Font.PLAIN, 14));
 		lblNewLabel_6.setBounds(10, 475, 109, 13);
 		contentPane.add(lblNewLabel_6);
 		
-		SearchTeamInput = new JTextField();
 		SearchTeamInput.setBounds(108, 472, 143, 19);
 		contentPane.add(SearchTeamInput);
 		SearchTeamInput.setColumns(10);
 		
-		JPanel panel = new JPanel();
 		panel.setBounds(48, 118, 430, 268);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scrollPane.setBounds(0, 0, 427, 268);
 		panel.add(scrollPane);
@@ -156,13 +162,11 @@ public class First extends JFrame
 	    }
 	    ContestList.setModel(model);
 		
-		JLabel lblNewLabel_2 = new JLabel("<html>In following page you will have 3 options:<br/>- 32 Teams competiton<br/>-16 Teams competition<br/>-4 Teams competition</html>",SwingConstants.CENTER);
 		lblNewLabel_2.setBounds(488, 90, 284, 132);
 		contentPane.add(lblNewLabel_2);
 		lblNewLabel_2.setForeground(new Color(233, 150, 122));
 		lblNewLabel_2.setFont(new Font("Maiandra GD", Font.PLAIN, 15));
 		
-		JButton ShowContestBtn = new JButton("Show");
 		ShowContestBtn.addMouseListener(new MouseAdapter()
 		{
 			@Override
@@ -175,7 +179,6 @@ public class First extends JFrame
 		ShowContestBtn.setBounds(48, 424, 85, 21);
 		contentPane.add(ShowContestBtn);
 		
-		JButton DeleteContestBtn = new JButton("Delete");
 		DeleteContestBtn.addMouseListener(new MouseAdapter()
 		{
 			@Override
@@ -192,7 +195,6 @@ public class First extends JFrame
 		DeleteContestBtn.setBounds(166, 424, 85, 21);
 		contentPane.add(DeleteContestBtn);
 		
-		JButton SearchTeamSummaryBtn = new JButton("Search by Summary");
 		SearchTeamSummaryBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
