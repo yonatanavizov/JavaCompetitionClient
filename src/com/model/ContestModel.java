@@ -46,18 +46,15 @@ public class ContestModel implements IModel
 	{
 		// called by Client
 		Contest[] data = (Contest[]) re.get_data();
-		System.out.println("--------\nCOntestController -- someone set my data\ngot "+ data.length+" amount");
 		for(int i = 0; i < data.length; i++)
 		{
 			int amount = data[i].get_amountOfTeamsInContest();
-			System.out.println(i + " is " + amount);
 			if(amount == 4 || amount == 16 || amount == 32)
 			{
 				ArrayList<Contest> current = contestMap.get(amount);
 				current.add(data[i]);
 			}
 		}
-		System.out.println("\\n-----");
 	}
 	
 	public ArrayList<Contest> get_contests_by_size(int size)

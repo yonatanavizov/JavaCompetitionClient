@@ -1,5 +1,4 @@
 package com.view;
-import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.EventQueue;
 
@@ -26,8 +25,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.awt.Color;
 
-public class Comp16 extends ComFrame {
-
+public class Comp16 extends ComFrame
+{
+	private static final long serialVersionUID = 83455501205027300L;
+	
 	private JPanel contentPane;
 	private JTextField IN1R1;
 	private JTextField IN2R1;
@@ -49,9 +50,7 @@ public class Comp16 extends ComFrame {
 	private static int compSize=16;
 	private Team winner ;
 
-	/**
-	 * Launch the application.
-	 */
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

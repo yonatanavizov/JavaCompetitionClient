@@ -1,8 +1,5 @@
 package com.view;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -11,34 +8,19 @@ import javax.swing.JTextField;
 import java.awt.Color;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-public class PopUp extends JFrame {
-
+public class PopUp extends JFrame
+{
+	private static final long serialVersionUID = 2280912508080114298L;
+	
 	private JPanel contentPane;
 	private JTextField txtHelloOverThere;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PopUp frame = new PopUp("Some");
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-
 	
-	public PopUp(String message) {
+	public PopUp(String message)
+	{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 807, 462);
 		contentPane = new JPanel();
@@ -49,6 +31,14 @@ public class PopUp extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton btnNewButton = new JButton("Ok");
+		btnNewButton.addMouseListener(new MouseAdapter()
+		{
+			@Override
+			public void mouseClicked(MouseEvent e)
+			{
+				Close();
+			}
+		});
 		btnNewButton.setBounds(224, 313, 320, 21);
 		contentPane.add(btnNewButton);
 		
@@ -60,5 +50,10 @@ public class PopUp extends JFrame {
 		contentPane.add(txtHelloOverThere);
 		txtHelloOverThere.setColumns(10);
 		txtHelloOverThere.setText(message);
+	}
+	
+	private void Close()
+	{
+		this.dispose();
 	}
 }

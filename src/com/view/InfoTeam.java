@@ -1,28 +1,21 @@
 package com.view;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import com.competition.dm.Team;
-import com.competition.dm.Team.Rank;
-import com.controllers.TeamController;
 
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
-import javax.swing.ImageIcon;
 import java.awt.Toolkit;
 
 public class InfoTeam extends JFrame {
 
+	private static final long serialVersionUID = -6344681467069451533L;
 	private JPanel contentPane;
-	private TeamController controller;
 	private Team team;
 	JLabel SummaryLa = new JLabel("New label");
 	JLabel WinLoseLa = new JLabel("New label");
@@ -30,33 +23,12 @@ public class InfoTeam extends JFrame {
 	JLabel RankLa = new JLabel("New label");
 	JLabel NameLa = new JLabel("New label");
 	JLabel IdLa = new JLabel("New label");
-	
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TeamController con = new TeamController();
-					Team ComTeam =con.Search("Put here Team name");
-					InfoTeam frame = new InfoTeam(ComTeam);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-			
-	}
 
-	/**
-	 * Create the frame.
-	 */
-	public InfoTeam(Team todisplay) {
+
+	public InfoTeam(Team todisplay)
+	{
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\USER\\eclipse-workspace\\UI_Proj\\Images\\Contents-logos.jpeg"));
 		team=todisplay;
-		controller=new TeamController ();
 		setForeground(new Color(95, 158, 160));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 770, 521);

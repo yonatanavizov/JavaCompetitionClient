@@ -33,7 +33,6 @@ public class ContestController
 	        System.out.println(entry.getKey() + ":" + entry.getValue());
 	        size += entry.getValue().size();
 	    }
-		System.out.println("==========================================\nparsed all contest, got "+size+" contests\n=====================");
 		contests = new Contest[size];
 		
 		int index = 0;

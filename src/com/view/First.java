@@ -143,7 +143,7 @@ public class First extends JFrame
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scrollPane.setBounds(0, 0, 427, 268);
 		panel.add(scrollPane);
-		JList ContestList = new JList();
+		JList<String> ContestList = new JList<String>();
 		scrollPane.setViewportView(ContestList);
 		String[] listValues = ContestSetup();
 	    DefaultListModel<String> model = new DefaultListModel<>();
@@ -198,6 +198,13 @@ public class First extends JFrame
 		TeamController control=new TeamController();
 		String TeamName= SearchTeamInput.getText();
 		Team team=control.Search(TeamName);
+		
+		if(team == null)
+		{
+			PopUp pu = new PopUp("In correct Team name. Not found.");
+			pu.setVisible(true);
+			return;
+		}
 		InfoTeam info = new InfoTeam(team);
 		info.setVisible(true);
 	}

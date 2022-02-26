@@ -1,5 +1,4 @@
 package com.view;
-import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.EventQueue;
 
@@ -15,32 +14,19 @@ import com.competition.dm.Team;
 
 import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.JTree;
-import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.JList;
-import javax.swing.ScrollPaneConstants;
-import java.awt.GridLayout;
-import java.awt.FlowLayout;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
-
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Random;
 import java.awt.Color;
 
 public class Comp4 extends ComFrame {
 
+	private static final long serialVersionUID = 4709206707675680656L;
 	private JPanel contentPane;
 	private JTextField IN1R3;
 	private JTextField IN2R3;

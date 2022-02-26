@@ -62,7 +62,7 @@ public class TeamModel implements IModel
 				return teams[i];
 			}
 		}
-		return teams[0];
+		return null;
 	}
 	
 	public Team getTeamBySummary(String text)

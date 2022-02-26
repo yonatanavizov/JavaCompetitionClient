@@ -1,5 +1,4 @@
 package com.view;
-import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.EventQueue;
 
@@ -13,26 +12,13 @@ import com.competition.dm.Team;
 import com.competition.dm.Match.OutCome;
 import com.competition.dm.Team.Rank;
 import com.controllers.TeamController;
-import com.google.gson.Gson;
 
 import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.JTree;
-import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.JList;
-import javax.swing.ScrollPaneConstants;
-import java.awt.GridLayout;
-import java.awt.FlowLayout;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -42,6 +28,8 @@ import java.awt.Color;
 
 public class Comp32 extends ComFrame {
 
+	private static final long serialVersionUID = -7384619098348525724L;
+	
 	private JPanel contentPane;
 	private JTextField IN1R2;
 	private JTextField IN2R2;
@@ -86,7 +74,6 @@ public class Comp32 extends ComFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TeamController ts = new TeamController();
 					Contest contest=new Contest("contest32",1, 32);
 					Team t1 = new Team(0,"The Bright Fellas", "basket ball", Rank.ADVANCED, 
 							23, 3, 0.33f, "The Bright FellasFellas");
@@ -137,14 +124,6 @@ public class Comp32 extends ComFrame {
 					ma.put("3", r4);
 					ma.put("4", r5);
 					contest.set_matches(ma);
-					
-					Gson gson = new Gson();
-					
-					System.out.println("======================GSON=========================");
-					String str = gson.toJson(contest, Contest.class);
-					System.out.println("======================GSON=========================");
-
-					System.out.println(str);
 					
 					Comp32 frame = new Comp32(contest);
 					frame.setVisible(true);
