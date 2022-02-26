@@ -21,13 +21,10 @@ import com.competition.dm.Contest;
 import com.competition.dm.Team;
 import com.controllers.ContestController;
 import com.controllers.TeamController;
-import com.model.ContestModel;
 
 import javax.swing.DefaultListModel;
 
 import java.awt.Toolkit;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 public class First extends JFrame
 {

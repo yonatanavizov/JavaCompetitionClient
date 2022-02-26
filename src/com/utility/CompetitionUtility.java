@@ -7,10 +7,17 @@ import com.competition.dm.Contest;
 public class CompetitionUtility {
 	public static int PortForServer = 34567;
 	public static String hostLocation = "127.0.0.1";
-	public static int contestId = 0;
+	public static int contestId = 100;
 	public enum DataTypes
 	{
 		Team, Match, Contest
+	}
+	
+	public static int new_contest_id()
+	{
+		int old = contestId;
+		contestId++;
+		return old;
 	}
 	
 	public static int getRandomNumber(int min, int max) // by index

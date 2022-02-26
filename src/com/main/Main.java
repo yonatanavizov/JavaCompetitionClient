@@ -6,6 +6,11 @@ import com.controllers.ContestController;
 import com.controllers.TeamController;
 import com.view.First;
 
+/*
+ * Made by Asaf Dangoor (ID 313307340) - asafdangoor@gmail.com
+ * Made by Yonatan Avizov (ID 318432101) - yonatanavizov1997@gmail.com
+ */
+
 public class Main
 {
 	public static void main(String[] args)

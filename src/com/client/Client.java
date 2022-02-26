@@ -56,9 +56,11 @@ public class Client implements Runnable
 	public String parseRequestToString(Request re)
 	{
 		
-		JsonSerializer<Request> serializer = new JsonSerializer<Request>() {  
+		JsonSerializer<Request> serializer = new JsonSerializer<Request>()
+		{  
 		    @Override
-		    public JsonElement serialize(Request src, Type typeOfSrc, JsonSerializationContext context) {
+		    public JsonElement serialize(Request src, Type typeOfSrc, JsonSerializationContext context)
+		    {
 		        JsonObject req = new JsonObject();
 
 		        req.addProperty("action", src.get_action());
@@ -74,7 +76,8 @@ public class Client implements Runnable
 		        		dataArr.add(context.serialize(data[i]));
 		        	}
 		        }
-
+		        System.out.println("Client Serializing JHSONARR");
+		        System.out.println(dataArr);
 		        req.add("data", dataArr);
 
 		        return req;

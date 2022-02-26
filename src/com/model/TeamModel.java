@@ -5,7 +5,6 @@ import com.client.Request;
 import com.competition.ISearchAlgoFamily;
 import com.competition.ISearchAlgoFamily.SearchResult;
 import com.competition.NaiveSearchAlgo;
-import com.competition.dm.Contest;
 import com.competition.dm.Team;
 import com.utility.CompetitionUtility;
 import com.utility.CompetitionUtility.DataTypes;

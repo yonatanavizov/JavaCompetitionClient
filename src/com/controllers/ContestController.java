@@ -30,7 +30,7 @@ public class ContestController
 	public Contest CreateRandomContest(int amountOfTeams)
 	{
 		Contest c = new Contest();
-		c.set_id(c.hashCode());
+		c.set_id(CompetitionUtility.new_contest_id());
 		c.set_amountOfTeamsInContest(amountOfTeams);
 		c.set_name("Contest " + c.get_id());
 		
