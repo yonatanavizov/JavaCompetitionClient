@@ -2,6 +2,7 @@ package com.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 import com.client.Client;
 import com.client.Request;
@@ -34,7 +35,7 @@ public class ContestModel implements IModel
 	@Override
 	public void PopulateData()
 	{
-		Client c = new Client(CompetitionUtility.PortForServer);
+		Client c = new Client();
 		Request con_req = new Request("get", "Contest", 0);
 		c.set_request(con_req);
 		
@@ -63,7 +64,7 @@ public class ContestModel implements IModel
 	{
 		return contestMap.get(size);
 	}
-	
+		
 	public void Remove(Contest con)
 	{
 		contestMap.get(con.get_amountOfTeamsInContest()).remove(con);
@@ -72,13 +73,45 @@ public class ContestModel implements IModel
 	public void Add(Contest con)
 	{
 		int amount = con.get_amountOfTeamsInContest();
-		if(amount!= 4 || amount != 16 || amount != 32) return; // invalid size, do not add.
-		contestMap.get(amount).add(con);
+		if(amount== 4 || amount == 16 || amount == 32)
+		{
+			contestMap.get(amount).add(new Contest(con));
+		}
+		
+		
+		System.out.println("Got new contest " + con.get_id() + " now at temp size " + contestMap.get(amount).size());
 	}
 	
-	public void UpdateServer()
+	public boolean UpdateServer()
 	{
 		//call client, send request
+		int size = 0;
+		
+	    for (Entry<Integer, ArrayList<Contest>> entry : contestMap.entrySet())
+	    {
+	        size += entry.getValue().size();
+	    }
+	    System.out.println("GOing to send to server, got size of " + size);
+		Request ask = new Request("add", "Contest", size);
+		Contest[] data= new Contest[size];
+		int index = 0;
+	    for (Entry<Integer, ArrayList<Contest>> entry : contestMap.entrySet())
+	    {
+	        ArrayList<Contest> current = entry.getValue();
+	        for(int i = 0; i < current.size(); i++)
+	        {
+	        	data[index] = current.get(i);
+	        	System.out.println(data[index].toString());
+	        }
+	    }
+		ask.set_data(data);
+		
+		Client c = new Client();
+		c.set_request(ask);
+		Thread th = new Thread(c);
+		th.start();
+		
+		return true;
 	}
 	
 	@Override

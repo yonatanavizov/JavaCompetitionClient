@@ -32,14 +32,12 @@ import com.utility.CompetitionUtility;
 public class Client implements Runnable
 {
 	public String parsedRequest;
-	int port;
 	Socket socket;
 	boolean shouldWaitForAnswer = false;
 	Request toReturn;
 	
-	public Client(int port)
+	public Client()
 	{
-		this.port = port;
 	}
 	
 	public void set_request(Request re)

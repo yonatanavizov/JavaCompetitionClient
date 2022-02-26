@@ -1,7 +1,6 @@
 package com.main;
 
 import java.awt.EventQueue;
-
 import com.view.First;
 
 public class Main
@@ -18,7 +17,8 @@ public class Main
 					First frame = new First();
 					frame.setVisible(true);
 				}
-				catch (Exception e) {
+				catch (Exception e)
+				{
 					e.printStackTrace();
 				}
 			}

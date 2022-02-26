@@ -64,6 +64,7 @@ public class Request
 	
 	public void set_data(Contest[] data)
 	{
+		amountOfObjects = data.length;
 		this.data = new Contest[amountOfObjects];
 		for(int i = 0; i < this.data.length; i++)
 		{

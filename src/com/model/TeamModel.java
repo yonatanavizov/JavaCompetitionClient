@@ -1,7 +1,13 @@
 package com.model;
 
+import java.util.List;
+
 import com.client.Client;
 import com.client.Request;
+import com.competition.ISearchAlgoFamily;
+import com.competition.ISearchAlgoFamily.SearchResult;
+import com.competition.KMPSearchAlgo;
+import com.competition.NaiveSearchAlgo;
 import com.competition.dm.Team;
 import com.utility.CompetitionUtility;
 import com.utility.CompetitionUtility.DataTypes;
@@ -9,6 +15,7 @@ import com.utility.CompetitionUtility.DataTypes;
 public class TeamModel implements IModel
 {
 	Team[] teams;
+	ISearchAlgoFamily searcher;
 	
     private static TeamModel teamModel = null;
 
@@ -22,13 +29,14 @@ public class TeamModel implements IModel
     
 	private TeamModel()
 	{
+		
 		PopulateData();
 	}
 	
 	@Override
 	public void PopulateData()
 	{
-		Client c = new Client(CompetitionUtility.PortForServer);
+		Client c = new Client();
 		Request team_req = new Request("get", "Team", 0);
 		c.set_request(team_req);
 		
@@ -55,9 +63,11 @@ public class TeamModel implements IModel
 	
 	public Team getTeamByName(String name)
 	{
-		for(int i=0;i<=teams.length-1;i++)
+		for(int i=0; i < teams.length; i++)
 		{
-			if(teams[i].get_name().equals(name))
+			searcher = new NaiveSearchAlgo();
+			SearchResult res = searcher.Search(teams[i].get_name(), name);
+			if(res != SearchResult.NotFound)
 			{
 				return teams[i];
 			}
@@ -65,18 +75,26 @@ public class TeamModel implements IModel
 		return null;
 	}
 	
-	public Team getTeamBySummary(String text)
+	public String getTeamBySummary(String text)
 	{
-		return teams[0];
+		String results = "";
+		for(int i = 0; i < teams.length;i++)
+		{
+			searcher = new NaiveSearchAlgo();
+			SearchResult res = searcher.Search(teams[i].get_summary(), text);
+			
+			if(res != SearchResult.NotFound)
+			{
+				results += teams[i].get_name() + ", ";
+			}
+		}
+		return results;
 	}
 
 
 	@Override
-	public DataTypes get_type() {
-		// TODO Auto-generated method stub
+	public DataTypes get_type()
+	{
 		return CompetitionUtility.DataTypes.Team;
 	}
-	
-	
-
 }

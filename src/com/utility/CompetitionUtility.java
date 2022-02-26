@@ -1,5 +1,7 @@
 package com.utility;
 
+import java.util.LinkedList;
+
 public class CompetitionUtility {
 	public static int PortForServer = 34567;
 	public static String hostLocation = "127.0.0.1";
@@ -12,5 +14,22 @@ public class CompetitionUtility {
 	public static int getRandomNumber(int min, int max) // by index
 	{
 	    return (int) ((Math.random() * (max - min)) + min - 1);
+	}
+	
+	public static int log2(int N)
+    {
+        int result = (int)(Math.log(N) / Math.log(2));
+        return result;
+    }
+	
+	public static <T> LinkedList<T> toList(T[] obj)
+	{
+		LinkedList<T> toReturn = new LinkedList<T>();
+		
+		for(int i = 0; i < obj.length; i++)
+		{
+			toReturn.add(obj[i]);
+		}
+		return toReturn;
 	}
 }

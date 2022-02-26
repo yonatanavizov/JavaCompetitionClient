@@ -10,6 +10,7 @@ import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.LinkedList;
 
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
@@ -24,8 +25,6 @@ import com.controllers.TeamController;
 import javax.swing.DefaultListModel;
 
 import java.awt.Toolkit;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class First extends JFrame
 {
@@ -33,9 +32,9 @@ public class First extends JFrame
 	
 	private JPanel contentPane;
 	private JTextField SearchTeamInput;
+	JList<String> ContestList;
 	ContestController contestsetup;
 	TeamController control;
-	Contest[] contestToDisplay;
 
 	public First()
 	{
@@ -122,7 +121,7 @@ public class First extends JFrame
 			}
 		});
 		//SearchTeamInput
-		SearchTeamBtn.setBounds(278, 452, 117, 21);
+		SearchTeamBtn.setBounds(278, 452, 156, 21);
 		contentPane.add(SearchTeamBtn);
 		
 		JLabel lblNewLabel_6 = new JLabel("Team name");
@@ -145,9 +144,9 @@ public class First extends JFrame
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scrollPane.setBounds(0, 0, 427, 268);
 		panel.add(scrollPane);
-		JList<String> ContestList = new JList<String>();
+		ContestList = new JList<String>();
 		scrollPane.setViewportView(ContestList);
-		String[] listValues = ContestSetup();
+		String[] listValues = ContestListDisplay();
 	    DefaultListModel<String> model = new DefaultListModel<>();
 	    for (String s : listValues) {
 	      model.addElement(s);
@@ -174,17 +173,19 @@ public class First extends JFrame
 		contentPane.add(ShowContestBtn);
 		
 		JButton DeleteContestBtn = new JButton("Delete");
-		DeleteContestBtn.addMouseListener(new MouseAdapter() {
+		DeleteContestBtn.addMouseListener(new MouseAdapter()
+		{
 			@Override
 			public void mouseClicked(MouseEvent e)
 			{
-			int index = ContestList.getSelectedIndex();
-			DefaultListModel<String> model = (DefaultListModel<String>) ContestList.getModel();
-			model.remove(index);
-			ContestList.setModel(model);
-			contestsetup.Remove(index);
+				int index = ContestList.getSelectedIndex();
+				DefaultListModel<String> model = (DefaultListModel<String>) ContestList.getModel();
+				model.remove(index);
+				ContestList.setModel(model);
+				contestsetup.Remove(index);
 			}
 		});
+		
 		DeleteContestBtn.setBounds(166, 424, 85, 21);
 		contentPane.add(DeleteContestBtn);
 		
@@ -195,13 +196,34 @@ public class First extends JFrame
 				OnClickedSearchTeam(true);
 			}
 		});
-		SearchTeamSummaryBtn.setBounds(279, 479, 127, 23);
+		SearchTeamSummaryBtn.setBounds(279, 479, 155, 23);
 		contentPane.add(SearchTeamSummaryBtn);
+		
+		JButton SaveAllBtn = new JButton("Save All");
+		SaveAllBtn.addMouseListener(new MouseAdapter()
+		{
+			@Override
+			public void mouseClicked(MouseEvent e)
+			{
+				boolean ans = contestsetup.SaveAll();
+				String s = "";
+				if(ans)
+				{
+					s = "Successfully saved to server";
+				}
+				else
+				{
+					s = "Failed to save to server";
+				}
+				
+				PopUp pu = new PopUp(s);
+				pu.setVisible(true);
+			}
+		});
+		
+		SaveAllBtn.setBounds(44, 84, 89, 23);
+		contentPane.add(SaveAllBtn);
 
-		
-		
-		//test area
-		
 	}
 	
 	
@@ -213,46 +235,67 @@ public class First extends JFrame
 		
 		if(bySummary)
 		{
-			team =control.SearchSummary(searchText);
+			String ans =control.SearchSummary(searchText);
+			PopUp pu = new PopUp(ans);
+			pu.setVisible(true);
 		}
 		else
 		{
 			team =control.Search(searchText);
+			
+			if(team == null)
+			{
+				PopUp pu = new PopUp("Team Not found.");
+				pu.setVisible(true);
+				return;
+			}
+			InfoTeam info = new InfoTeam(team);
+			info.setVisible(true);
 		}
 		
 		
-		if(team == null)
-		{
-			PopUp pu = new PopUp("Team Not found.");
-			pu.setVisible(true);
-			return;
-		}
-		InfoTeam info = new InfoTeam(team);
-		info.setVisible(true);
+		
 	}
 	
 	
-	private String [] ContestSetup()
+	private String [] ContestListDisplay()
 	{
-		contestToDisplay = contestsetup.get_contests();
-		String [] array=new String [contestToDisplay.length];
-		for ( int i=0; i< contestToDisplay.length; i++)
+		LinkedList<Contest> contestToDisplay = contestsetup.get_contests();
+		int len = contestToDisplay.size();
+		String [] array=new String [len];
+		for ( int i=0; i< len; i++)
 		{
-			array[i] = contestToDisplay[i].toString();
+			array[i] = contestToDisplay.get(i).toString();
 		}
 		return array ;
 	}
 	
 	private void CreateContest(int size)
 	{
+		System.out.println("Going to create a random tornument " + size);
+		Contest toDisplay = contestsetup.CreateRandomContest(size);
+		switch(size)
+		{
+			case 4:
+				  Comp4 frame4=new Comp4(toDisplay);
+				  frame4.Display();
+				break;
+			case 16:
+				Comp16 frame16=new Comp16(toDisplay);
+				  frame16.Display();
+				break;
+			case 32:
+				Comp32 frame32=new Comp32(toDisplay);
+				  frame32.Display();
+				break;
+		}
 		
-		  //Com16 frame16=new Com16();
-		  //frame16.Display();
+		UpdateJListContest(toDisplay.toString());
 	}
 	
 	private void ShowContest(int index)
 	{
-		Contest toDisplay = contestToDisplay[index];
+		Contest toDisplay = contestsetup.get_contest_by_JListID(index);
 		
 		switch(toDisplay.get_amountOfTeamsInContest())
 		{
@@ -269,5 +312,12 @@ public class First extends JFrame
 				  frame32.Display();
 				break;
 		}
+	}
+	
+	private void UpdateJListContest(String toAdd)
+	{
+	    DefaultListModel<String> model = (DefaultListModel<String>) ContestList.getModel();
+	    model.addElement(toAdd);
+	    ContestList.setModel(model);
 	}
 }

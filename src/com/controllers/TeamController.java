@@ -19,7 +19,7 @@ public class TeamController
 		return model.getTeamByName(name);
 	}
 	
-	public Team SearchSummary(String text)
+	public String SearchSummary(String text)
 	{
 		//KMP search here
 		return model.getTeamBySummary(text);
@@ -45,6 +45,11 @@ public class TeamController
 		{
 			amount = 4;
 		}
+		else if(amount == teams.length)
+		{
+			return teams;
+		}
+		
 		boolean[] takenTeams = new boolean[teams.length];
 		
 		for(int i = 0; i < amount; i++)
