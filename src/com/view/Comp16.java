@@ -378,6 +378,14 @@ public class Comp16 extends ComFrame
 			TeamController control=new TeamController();
 			String TeamName= WIN.getText();
 			Team team=control.Search(TeamName);
+			
+			if(team == null)
+			{
+				PopUp pu = new PopUp("In correct Team name. Not found.");
+				pu.setVisible(true);
+				return;
+			}
+			
 			InfoTeam info = new InfoTeam(team);
 			info.setVisible(true);
 		}

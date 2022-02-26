@@ -582,12 +582,21 @@ public class Comp32 extends ComFrame {
 			 WIN.setText("None");
 		 }
 	}
-	 private void OnClickedSearchTeam()
+	 
+	private void OnClickedSearchTeam()
+	{
+		TeamController control=new TeamController();
+		String TeamName= WIN.getText();
+		Team team=control.Search(TeamName);
+		
+		if(team == null)
 		{
-			TeamController control=new TeamController();
-			String TeamName= WIN.getText();
-			Team team=control.Search(TeamName);
-			InfoTeam info = new InfoTeam(team);
-			info.setVisible(true);
+			PopUp pu = new PopUp("In correct Team name. Not found.");
+			pu.setVisible(true);
+			return;
 		}
+		
+		InfoTeam info = new InfoTeam(team);
+		info.setVisible(true);
+	}
 }
