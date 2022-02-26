@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.awt.Color;
 
-public class Com16 extends ComFrame {
+public class Comp16 extends ComFrame {
 
 	private JPanel contentPane;
 	private JTextField IN1R1;
@@ -86,7 +86,7 @@ public class Com16 extends ComFrame {
 					ma.put("2", r3);
 					ma.put("3", r4);
 					contest.set_matches(ma);
-					Com16 frame = new Com16(contest);
+					Comp16 frame = new Comp16(contest);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -98,7 +98,7 @@ public class Com16 extends ComFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Com16(Contest contest) {
+	public Comp16(Contest contest) {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 933, 568);
 		contentPane = new JPanel();

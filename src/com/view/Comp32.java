@@ -11,7 +11,9 @@ import com.competition.dm.Contest;
 import com.competition.dm.Match;
 import com.competition.dm.Team;
 import com.competition.dm.Match.OutCome;
+import com.competition.dm.Team.Rank;
 import com.controllers.TeamController;
+import com.google.gson.Gson;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -38,7 +40,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.awt.Color;
 
-public class Com32 extends ComFrame {
+public class Comp32 extends ComFrame {
 
 	private JPanel contentPane;
 	private JTextField IN1R2;
@@ -86,7 +88,10 @@ public class Com32 extends ComFrame {
 				try {
 					TeamController ts = new TeamController();
 					Contest contest=new Contest("contest32",1, 32);
-					Team t1 =ts.Search("T2");
+					Team t1 = new Team(0,"The Bright Fellas", "basket ball", Rank.ADVANCED, 
+							23, 3, 0.33f, "The Bright FellasFellas");
+
+					//Team t1 =ts.Search("The Bright Fellas");
 					Match m1 =new Match (t1,t1,0);
 					m1.set_outcome(OutCome.Team_A_Won);
 					ArrayList <Match> r1=new ArrayList<Match>();
@@ -132,8 +137,16 @@ public class Com32 extends ComFrame {
 					ma.put("3", r4);
 					ma.put("4", r5);
 					contest.set_matches(ma);
+					
+					Gson gson = new Gson();
+					
+					System.out.println("======================GSON=========================");
+					String str = gson.toJson(contest, Contest.class);
+					System.out.println("======================GSON=========================");
 
-					Com32 frame = new Com32(contest);
+					System.out.println(str);
+					
+					Comp32 frame = new Comp32(contest);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -145,7 +158,7 @@ public class Com32 extends ComFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Com32(Contest contest) {
+	public Comp32(Contest contest) {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 933, 568);
 		contentPane = new JPanel();

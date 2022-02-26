@@ -15,6 +15,16 @@ public class ContestController
 	public ContestController()
 	{
 		model = ContestModel.get_instance();
+		
+	}
+	
+	public ArrayList<Contest> GetContests(int amountOfTeams)
+	{
+		return model.get_contests_by_size(amountOfTeams);
+	}
+	
+	public Contest[] get_contests()
+	{	
 		HashMap<Integer, ArrayList<Contest>> db = model.get_db();
 		
 		int size = 0;
@@ -23,6 +33,7 @@ public class ContestController
 	        System.out.println(entry.getKey() + ":" + entry.getValue());
 	        size += entry.getValue().size();
 	    }
+		System.out.println("==========================================\nparsed all contest, got "+size+" contests\n=====================");
 		contests = new Contest[size];
 		
 		int index = 0;
@@ -35,15 +46,6 @@ public class ContestController
 				index++;
 			}
 	    }
-	}
-	
-	public ArrayList<Contest> GetContests(int amountOfTeams)
-	{
-		return model.get_contests_by_size(amountOfTeams);
-	}
-	
-	public Contest[] get_contests()
-	{		
 		return contests;
 	}
 	

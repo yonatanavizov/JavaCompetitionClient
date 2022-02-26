@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.JList;
 import javax.swing.ScrollPaneConstants;
 
+import com.competition.dm.Contest;
 import com.competition.dm.Team;
 import com.controllers.ContestController;
 import com.controllers.TeamController;
@@ -32,7 +33,7 @@ public class First extends JFrame
 	private JTextField SearchTeamInput;
 	ContestController contestsetup;
 	TeamController control;
-
+	Contest[] contestToDisplay;
 
 	public First()
 	{
@@ -185,6 +186,10 @@ public class First extends JFrame
 		DeleteContestBtn.setBounds(166, 424, 85, 21);
 		contentPane.add(DeleteContestBtn);
 
+		
+		
+		//test area
+		
 	}
 	
 	
@@ -200,13 +205,12 @@ public class First extends JFrame
 	
 	private String [] ContestSetup()
 	{
-		int len = contestsetup.get_contests().length;
-		String [] array=new String [len];
-		for ( int i=0;i<=len-1;i++)
+		contestToDisplay = contestsetup.get_contests();
+		String [] array=new String [contestToDisplay.length];
+		for ( int i=0; i< contestToDisplay.length; i++)
 		{
-			array[i]= contestsetup.get_contests()[i].toString();
+			array[i] = contestToDisplay[i].toString();
 		}
-		
 		return array ;
 	}
 	
@@ -218,7 +222,23 @@ public class First extends JFrame
 	
 	private void ShowContest(int index)
 	{
+		Contest toDisplay = contestToDisplay[index];
 		
+		switch(toDisplay.get_amountOfTeamsInContest())
+		{
+			case 4:
+				  Comp4 frame4=new Comp4(toDisplay);
+				  frame4.Display();
+				break;
+			case 16:
+				Comp16 frame16=new Comp16(toDisplay);
+				  frame16.Display();
+				break;
+			case 32:
+				Comp32 frame32=new Comp32(toDisplay);
+				  frame32.Display();
+				break;
+		}
 	}
 
 }
